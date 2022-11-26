@@ -4,40 +4,30 @@ import { Bouton } from "../Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 export default function Form(){
   const [file,setFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [isCheck, setisCheck] = useState(false)
-  const link = 'http://192.168.56.1:3000/api/affindas'
-  let navigate = useNavigate()
+
+  const {AffindaCredential, AffindaAPI} = require("@affinda/affinda");
+  const fs = require("fs");
+  const credential = new AffindaCredential(process.env.APP_KEY)
+  const client = new AffindaAPI(credential)
+  const readStream = fs.createReadStream(file);
+
+  // const link = 'http://192.168.56.1:3000/api/affindas' 
+  // let navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
-    const formData = new FormData()
-    formData.append('file', file)
-    console.log(formData, file)
-    axios
-      .post(link, formData, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        if (res) {
-          console.log('response', res.data.data)
-          navigate('/matching', {
-            replace: false,
-            state: {
-              data: res.data.data,
-            },
-          })
-          setLoading(false)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    client.createInvoice({file: readStream}).then((result) => {
+      console.log("Returned data:");
+      console.dir(result)
+  }).catch((err) => {
+      console.log("An error occurred:");
+      console.error(err);
+  });
   }
 
 
