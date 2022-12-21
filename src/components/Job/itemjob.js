@@ -1,8 +1,5 @@
 import React from 'react'
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Details from "../Job/detailsjob"
-import { Link, useNavigate } from 'react-router-dom';
+
 const ItemWithSvg = ({ label, icon }) => {
   return (
     <div className='flex items-center gap-1 mr-2'>
