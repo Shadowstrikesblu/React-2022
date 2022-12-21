@@ -11,7 +11,10 @@
     "fs": "^0.0.1-security",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-paginate": "^8.1.4",
+=======
+>>>>>>> 1f4e813939b4fbbefa24f5baa9b4ae2fa7ca758b
     "react-scripts": "^5.0.1",
     "request": "^2.88.2",
     "resume-parser": "^1.1.0",
@@ -42,10 +45,14 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "react-router-dom": "^6.4.2",
     "tailwindcss": "^3.2.4",
+=======
+    "react-router-dom": "^6.4.2",
+>>>>>>> 1f4e813939b4fbbefa24f5baa9b4ae2fa7ca758b
     "web-vitals": "^3.0.4"
   }
 }
