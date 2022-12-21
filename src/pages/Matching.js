@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-<<<<<<< HEAD
 import ListJob from '../components/Job/listjob'
 import Tree from '../components/Tree/tree'
 export default function Matching(){
@@ -40,11 +39,5 @@ export default function Matching(){
             </ErrorBoundary>
         </div>
 
-=======
-
-export default function Matching(){
-    return(
-        <p> hey</p>
->>>>>>> 1f4e813939b4fbbefa24f5baa9b4ae2fa7ca758b
     )
 }
