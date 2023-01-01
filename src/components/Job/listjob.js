@@ -2,14 +2,14 @@ import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ItemJobs from '../Job/itemjob'
-import { exportdata, newposts } from '../Tree/tree';
+import { exportdata } from '../Tree/tree';
 import loader from '../../assets/loader.gif'
 import ReactPaginate from "react-paginate"
 // import { format } from 'prettier';
-import { object } from 'prop-types';
+// import { object } from 'prop-types';
 
 
-export default function ListJob({  }) {
+export default function ListJob() {
   const [posts,setPosts]=useState([])
   const [loading,setLoading]=useState(false)
   const [PageNumber, setPageNumber] = useState(0)
@@ -19,8 +19,8 @@ export default function ListJob({  }) {
 
   let tmp;
   useEffect(()=>{appel();},[])
-  const Last = PageNumber * usersPerPage
-  const First = (Last - usersPerPage)
+  // const Last = PageNumber * usersPerPage
+  // const First = (Last - usersPerPage)
   // console.log("first",First)
 
   // const currentPosts = posts.slice(First,Last)
@@ -42,34 +42,49 @@ export default function ListJob({  }) {
   )
   function appel(){
     setLoading(true)
-    axios.get("http://localhost:8090/api/matching/match",{
+    axios.get("http://localhost:8090/api/matching/scrapp",{
         header:{"Access-Control-Allow-Origin" :"http://localhost:8090",
                 "Content-Type":"application/x-www-form-urlencoded",
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"},
         params: {data: FormData}
       })
       .then(res => {
-        // res = res.slice(0,50)
         setPosts(res.data);
         setLoading(false)
-        console.log('post',res.data)
+        console.log('post =>',res.data)
       })
   }
-  for(let i  = 0;  i<exportdata.workExperience.length;i++){
-    if(exportdata.workExperience[i].jobTitle === '' || exportdata.location.city === '' ){
-         tmp = "{job:dev ops" + ",location:Paris},";
-         FormData = FormData.concat(tmp);
-
-    }else{
-         tmp = "{job:"+ exportdata.workExperience[i].jobTitle + ",location:"+exportdata.location.city+"},";
-      FormData = FormData.concat(tmp);
+  // if(exportdata.location === null){
+    // for(let i  = 0;  i<exportdata.workExperience.length;i++){
+    //   tmp = "{job:"+ exportdata.workExperience[i].jobTitle + ",location:Paris},";
+    //   FormData = FormData.concat(tmp);
+    //   // console.log('sdds',exportdata.workExperience[i])
+  // }
+  // }else{
+  //   for(let i  = 0;  i<exportdata.workExperience.length;i++){
+  //     // tmp = "{job:"+ exportdata.workExperience[i].jobTitle + ",location:"+exportdata.location.city+"},";
+  //     tmp = "{job:dev ops }" + "{location:Paris},";
+  //     FormData = FormData.concat(tmp);
+  //     // console.log('sdds',exportdata.workExperience[i])
+  //   // }
+  // }
+  // for(let i  = 0;  i<exportdata.workExperience.length;i++){
+    // tmp = "{job:"+ exportdata.workExperience[0].jobTitle + ",location:"+exportdata.location.formatted+"},";
+    tmp = "{job:"+ exportdata.workExperience[0].jobTitle + ",location:"+exportdata.location.formatted[0]+"},";
+    FormData = FormData.concat(tmp);
+      console.log("Form",FormData)
       // console.log('sdds',exportdata.workExperience[i])
-    }
-  }
+    // }
+
+  
 
   FormData = FormData.slice(0,-1)
   FormData = FormData.concat("]")
   FormData = FormData.replace("/"," ")
+  // FormData = Array.from(FormData)
+  console.log("type : "+ typeof(FormData))
+  console.log(FormData)
+
 
   return (
     <div className="col-span-2">
