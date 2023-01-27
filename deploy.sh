@@ -7,4 +7,4 @@ npm run build
 echo "Deploying files to server"
 scp -r build/* test@95.179.222.249:/var/wwww/95.179.222.249/
 
-echp "Done"
+echo "Done"
