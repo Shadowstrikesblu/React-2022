@@ -30,7 +30,7 @@ export default function Form(){
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + 'c1e386951ce5ae401e37d780fee50f5abd286a75',
+        'Authorization': 'Bearer ' + 'a7930fb964dedbed291f76076e5baff848c628ea004d50e7d7307926d2634c5f',
 
       },
     })

@@ -18,10 +18,9 @@ export default function ListJob() {
   let FormData = "[";
 
   let tmp;
+  //  useEffect(()=>{appel();},[])
   useEffect(()=>{appel();},[])
-  // const Last = PageNumber * usersPerPage
-  // const First = (Last - usersPerPage)
-  // console.log("first",First)
+
 
   // const currentPosts = posts.slice(First,Last)
   const pageCount = Math.ceil(posts.length / usersPerPage)
@@ -43,8 +42,9 @@ export default function ListJob() {
   function appel(){
     setLoading(true)
     axios.get("http://localhost:8090/api/matching/scrapp",{
-        header:{"Access-Control-Allow-Origin" :"http://localhost:8090",
-                "Content-Type":"application/x-www-form-urlencoded",
+      // header:{"Access-Control-Allow-Origin" :"http://localhost:8090",
+      header:{"Access-Control-Allow-Origin" :"http://217.69.14.4:8090",
+      "Content-Type":"application/x-www-form-urlencoded",
                 "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"},
         params: {data: FormData}
       })
@@ -54,29 +54,11 @@ export default function ListJob() {
         console.log('post =>',res.data)
       })
   }
-  // if(exportdata.location === null){
-    // for(let i  = 0;  i<exportdata.workExperience.length;i++){
-    //   tmp = "{job:"+ exportdata.workExperience[i].jobTitle + ",location:Paris},";
-    //   FormData = FormData.concat(tmp);
-    //   // console.log('sdds',exportdata.workExperience[i])
-  // }
-  // }else{
-  //   for(let i  = 0;  i<exportdata.workExperience.length;i++){
-  //     // tmp = "{job:"+ exportdata.workExperience[i].jobTitle + ",location:"+exportdata.location.city+"},";
-  //     tmp = "{job:dev ops }" + "{location:Paris},";
-  //     FormData = FormData.concat(tmp);
-  //     // console.log('sdds',exportdata.workExperience[i])
-  //   // }
-  // }
-  // for(let i  = 0;  i<exportdata.workExperience.length;i++){
-    // tmp = "{job:"+ exportdata.workExperience[0].jobTitle + ",location:"+exportdata.location.formatted+"},";
+
     tmp = "{job:"+ exportdata.workExperience[0].jobTitle + ",location:"+exportdata.location.formatted[0]+"},";
     FormData = FormData.concat(tmp);
       console.log("Form",FormData)
-      // console.log('sdds',exportdata.workExperience[i])
-    // }
 
-  
 
   FormData = FormData.slice(0,-1)
   FormData = FormData.concat("]")
